@@ -9,7 +9,7 @@ class King(Piece):
 
     def __init__(self, alliance, position):
         self.alliance = alliance
-        self.positon = position
+        self.position = position
 
     def toString(self):
         return "K" if self.alliance == "Black" else "k"
@@ -17,9 +17,9 @@ class King(Piece):
     def calculateLegalMoves(self, board):
         legalMoves = []
         for vector in self.possibleMoveVectors:
-            destCoord = self.positon + vector
+            destCoord = self.position + vector
 
-            badMove = self.calculateEdgeCases(self.positon, vector)
+            badMove = self.calculateEdgeCases(self.position, vector)
             if not badMove:
 
                 if 0 <= destCoord < 64:

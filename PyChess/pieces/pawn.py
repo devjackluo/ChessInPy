@@ -11,7 +11,7 @@ class Pawn(Piece):
 
     def __init__(self, alliance, position):
         self.alliance = alliance
-        self.positon = position
+        self.position = position
         if self.alliance == "Black":
             self.allianceMultiple = 1
         else:
@@ -28,7 +28,7 @@ class Pawn(Piece):
 
         for vector in self.possibleMoveVectors:
 
-            destCoord = self.positon + (vector*self.allianceMultiple)
+            destCoord = self.position + (vector*self.allianceMultiple)
 
             if 0 <= destCoord < 64:
 
@@ -43,14 +43,14 @@ class Pawn(Piece):
 
                 elif vector == 16 and self.firstMove:
 
-                    behindJump = self.positon + (8 * self.allianceMultiple)
+                    behindJump = self.position + (8 * self.allianceMultiple)
                     if board.gameTiles[behindJump].pieceOnTile.toString() == "-":
                         if board.gameTiles[destCoord].pieceOnTile.toString() == "-":
                             legalMoves.append(destCoord)
 
                 elif vector == 7:
 
-                    if (not self.positon in Piece.eighthCol and not self.alliance == "White") or (not self.positon in Piece.firstCol and not self.alliance == "Black"):
+                    if (not self.position in Piece.eighthCol and not self.alliance == "White") or (not self.position in Piece.firstCol and not self.alliance == "Black"):
 
                             if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
                                 piece = board.gameTiles[destCoord].pieceOnTile
@@ -73,7 +73,7 @@ class Pawn(Piece):
 
                 elif vector == 9:
 
-                    if (not self.positon in Piece.firstCol and not self.alliance == "White") or (not self.positon in Piece.eighthCol and not self.alliance == "Black"):
+                    if (not self.position in Piece.firstCol and not self.alliance == "White") or (not self.position in Piece.eighthCol and not self.alliance == "Black"):
 
                             if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
                                 piece = board.gameTiles[destCoord].pieceOnTile

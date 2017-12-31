@@ -4,12 +4,12 @@ from piece import Piece
 class Knight(Piece):
 
     alliance = None
-    positon = None
+    position = None
     possibleMoveVectors = [-17,-15,-10,-6,6,10,15,17]
 
     def __init__(self, alliance, position):
         self.alliance = alliance
-        self.positon = position
+        self.position = position
 
 
     def toString(self):
@@ -18,9 +18,9 @@ class Knight(Piece):
     def calculateLegalMoves(self, board):
         legalMoves = []
         for vector in self.possibleMoveVectors:
-            destCoord = self.positon + vector
+            destCoord = self.position + vector
             if 0 <= destCoord < 64:
-                badMove = self.calculateEdgeCases(self.positon, vector)
+                badMove = self.calculateEdgeCases(self.position, vector)
                 if not badMove:
                     destTile = board.gameTiles[destCoord]
                     if destTile.pieceOnTile.toString() == "-":
@@ -50,3 +50,6 @@ class Knight(Piece):
                 return True
 
         return False
+
+    # def move(self, destination):
+    #     return Knight(self.alliance, destination)

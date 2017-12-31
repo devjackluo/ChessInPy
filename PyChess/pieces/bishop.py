@@ -8,7 +8,7 @@ class Bishop(Piece):
 
     def __init__(self, alliance, position):
         self.alliance = alliance
-        self.positon = position
+        self.position = position
 
     def toString(self):
         return "B" if self.alliance == "Black" else "b"
@@ -18,11 +18,11 @@ class Bishop(Piece):
 
         legalMoves = []
         for vector in self.possibleMoveVectors:
-            destCoord = self.positon
+            destCoord = self.position
             while 0 <= destCoord < 64:
                 badMove = self.calculateEdgeCases(destCoord, vector)
                 if badMove:
-                    print('bad')
+                    #print('bad')
                     break
                 else:
                     destCoord += vector

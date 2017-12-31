@@ -3,8 +3,8 @@ class Piece:
     def __init__(self):
         pass
 
-    def calculateLegalMoves(self):
-        pass
+    # def calculateLegalMoves(self):
+    #     pass
 
     firstCol = [0,8,16,24,32,40,48,56]
     secondCol = [1,9,17,25,33,41,49,57]
