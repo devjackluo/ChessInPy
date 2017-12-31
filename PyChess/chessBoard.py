@@ -38,10 +38,10 @@ class Board:
         self.gameTiles[14] = Tile(14, pawn.Pawn("Black", 14))
         self.gameTiles[15] = Tile(15, pawn.Pawn("Black", 15))
 
-        self.gameTiles[25] = Tile(25, pawn.Pawn("White", 25))
-        #self.gameTiles[18] = Tile(18, pawn.Pawn("Black", 18))
-        self.gameTiles[26] = Tile(26, pawn.Pawn("Black", 26))
-        self.gameTiles[24] = Tile(24, pawn.Pawn("Black", 24))
+        # self.gameTiles[25] = Tile(25, pawn.Pawn("White", 25))
+        # #self.gameTiles[18] = Tile(18, pawn.Pawn("Black", 18))
+        # self.gameTiles[26] = Tile(26, pawn.Pawn("Black", 26))
+        # self.gameTiles[24] = Tile(24, pawn.Pawn("Black", 24))
 
         self.gameTiles[48] = Tile(48, pawn.Pawn("White", 48))
         self.gameTiles[49] = Tile(49, pawn.Pawn("White", 49))
@@ -62,18 +62,18 @@ class Board:
 
     def printBoard(self):
         count = 0
-        for tiles in range(len(firstBoard.gameTiles)):
-            print('|', end=firstBoard.gameTiles[tiles].pieceOnTile.toString())
+        for tiles in range(len(self.gameTiles)):
+            print('|', end=self.gameTiles[tiles].pieceOnTile.toString())
             count += 1
             if count == 8:
                 print('|', end='\n')
                 count = 0
 
 
-firstBoard = Board()
-firstBoard.createBoard()
-print(firstBoard.gameTiles)
-firstBoard.printBoard()
+# firstBoard = Board()
+# firstBoard.createBoard()
+# print(firstBoard.gameTiles)
+# firstBoard.printBoard()
 #firstBoard.gameTiles[1].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[0].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[2].pieceOnTile.calculateLegalMoves(firstBoard)
@@ -81,8 +81,8 @@ firstBoard.printBoard()
 #firstBoard.gameTiles[4].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[9].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[55].pieceOnTile.calculateLegalMoves(firstBoard)
-
-firstBoard.enPassPawn = firstBoard.gameTiles[24].pieceOnTile
-firstBoard.enPassPawnBehind = 16
-
-firstBoard.gameTiles[25].pieceOnTile.calculateLegalMoves(firstBoard)
+#
+# firstBoard.enPassPawn = firstBoard.gameTiles[24].pieceOnTile
+# firstBoard.enPassPawnBehind = 16
+#
+# firstBoard.gameTiles[25].pieceOnTile.calculateLegalMoves(firstBoard)
