@@ -23,8 +23,8 @@ class Pawn(Piece):
     def calculateLegalMoves(self, board):
 
         legalMoves = []
-        print(self.possibleMoveVectors)
-        print(self.allianceMultiple)
+        #print(self.possibleMoveVectors)
+        #print(self.allianceMultiple)
 
         for vector in self.possibleMoveVectors:
 
