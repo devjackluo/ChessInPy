@@ -70,6 +70,32 @@ def drawChessPieces():
         ypos += 100
 
 
+
+def updateChessPieces():
+
+    xpos = 0
+    ypos = 0
+    number = 0
+    newPieces = []
+
+    for _ in range(8):
+        for _ in range(8):
+            if not firstBoard.gameTiles[number].pieceOnTile.toString() == "-":
+
+                img = pygame.image.load(
+                    "./ChessArt/" + firstBoard.gameTiles[number].pieceOnTile.alliance[0].upper() + firstBoard.gameTiles[
+                        number].pieceOnTile.toString().upper() + ".png")
+                img = pygame.transform.scale(img, (100, 100))
+
+                newPieces.append([img, [xpos, ypos], firstBoard.gameTiles[number].pieceOnTile])
+            xpos += 100
+            number += 1
+        xpos = 0
+        ypos += 100
+
+    return newPieces
+
+
 allSqParams = createSqParams()
 drawChessPieces()
 
@@ -128,12 +154,16 @@ while not quitGame:
                     # print(theMove)
                     # print(firstBoard)
                     thisMove = Move(firstBoard, allPieces[selectedImage][2], theMove)
-                    newTiles = thisMove.createNewBoard()
+                    newBoard = thisMove.createNewBoard()
+                    firstBoard = newBoard
+                    #firstBoard.printBoard()
 
-                    print(len(newTiles))
-                    firstBoard.gameTiles = newTiles
-                    firstBoard.printBoard()
+                    # TODO update game pieces
+                    newP = updateChessPieces()
+                    allPieces = newP
+                    #print(len(newP))
 
+                    #allPieces[selectedImage][2].position = theMove
                     # allPieces[selectedImage][2].position = theMove
                     # print(allPieces[selectedImage][2].position)
 

@@ -68,6 +68,7 @@ class Pawn(Piece):
                                 if board.enPassPawnBehind == destCoord:
                                     enPP = board.enPassPawn
                                     if not self.alliance == enPP.alliance:
+
                                         legalMoves.append(destCoord)
 
 

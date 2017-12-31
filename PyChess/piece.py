@@ -1,5 +1,7 @@
 class Piece:
 
+    firstMove = True
+
     def __init__(self):
         pass
 
