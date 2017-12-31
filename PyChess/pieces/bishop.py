@@ -15,6 +15,7 @@ class Bishop(Piece):
 
 
     def calculateLegalMoves(self, board):
+
         legalMoves = []
         for vector in self.possibleMoveVectors:
             destCoord = self.positon
@@ -28,10 +29,10 @@ class Bishop(Piece):
                     if 0 <= destCoord < 64:
                         destTile = board.gameTiles[destCoord]
                         if destTile.pieceOnTile.toString() == "-":
-                            print('can move')
+                            legalMoves.append(destCoord)
                         else:
                             if not destTile.pieceOnTile.alliance == self.alliance:
-                                print('can attack')
+                                legalMoves.append(destCoord)
                             # break regardless of alliance because blocked
                             break
 

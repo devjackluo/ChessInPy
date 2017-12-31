@@ -81,8 +81,6 @@ class Board:
 #firstBoard.gameTiles[4].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[9].pieceOnTile.calculateLegalMoves(firstBoard)
 #firstBoard.gameTiles[55].pieceOnTile.calculateLegalMoves(firstBoard)
-#
 # firstBoard.enPassPawn = firstBoard.gameTiles[24].pieceOnTile
 # firstBoard.enPassPawnBehind = 16
-#
 # firstBoard.gameTiles[25].pieceOnTile.calculateLegalMoves(firstBoard)

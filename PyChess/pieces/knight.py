@@ -24,10 +24,10 @@ class Knight(Piece):
                 if not badMove:
                     destTile = board.gameTiles[destCoord]
                     if destTile.pieceOnTile.toString() == "-":
-                        print('can move')
+                        legalMoves.append(destCoord)
                     else:
                         if not destTile.pieceOnTile.alliance == self.alliance:
-                            print('can attack')
+                            legalMoves.append(destCoord)
 
         return legalMoves
 

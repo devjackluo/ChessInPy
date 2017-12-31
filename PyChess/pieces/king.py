@@ -25,10 +25,10 @@ class King(Piece):
                 if 0 <= destCoord < 64:
                     destTile = board.gameTiles[destCoord]
                     if destTile.pieceOnTile.toString() == "-":
-                        print('can move')
+                        legalMoves.append(destCoord)
                     else:
                         if not destTile.pieceOnTile.alliance == self.alliance:
-                            print('can attack')
+                            legalMoves.append(destCoord)
 
         return legalMoves
 

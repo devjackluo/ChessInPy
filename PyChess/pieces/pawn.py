@@ -35,18 +35,18 @@ class Pawn(Piece):
                 if vector == 8 and board.gameTiles[destCoord].pieceOnTile.toString() == "-":
 
                     if self.alliance == "Black" and destCoord in Piece.eighthRow:
-                        print('black promotion')
+                        legalMoves.append(destCoord)
                     elif self.alliance == "White" and destCoord in Piece.firstRow:
-                        print('white promotion')
+                        legalMoves.append(destCoord)
                     else:
-                        print('pawn move')
+                        legalMoves.append(destCoord)
 
                 elif vector == 16 and self.firstMove:
 
                     behindJump = self.positon + (8 * self.allianceMultiple)
                     if board.gameTiles[behindJump].pieceOnTile.toString() == "-":
                         if board.gameTiles[destCoord].pieceOnTile.toString() == "-":
-                            print('pawn jump')
+                            legalMoves.append(destCoord)
 
                 elif vector == 7:
 
@@ -57,19 +57,18 @@ class Pawn(Piece):
                                 if not self.alliance == piece.alliance:
 
                                     if self.alliance == "Black" and destCoord in Piece.eighthRow:
-                                        print('black promotion attack')
+                                        legalMoves.append(destCoord)
                                     elif self.alliance == "White" and destCoord in Piece.firstRow:
-                                        print('white promotion attack')
+                                        legalMoves.append(destCoord)
                                     else:
-                                        print('pawn attack')
+                                        legalMoves.append(destCoord)
 
                             elif not board.enPassPawn == None:
 
                                 if board.enPassPawnBehind == destCoord:
                                     enPP = board.enPassPawn
                                     if not self.alliance == enPP.alliance:
-
-                                        print('enPassant Attack')
+                                        legalMoves.append(destCoord)
 
 
                 elif vector == 9:
@@ -81,19 +80,18 @@ class Pawn(Piece):
                                 if not self.alliance == piece.alliance:
 
                                     if self.alliance == "Black" and destCoord in Piece.eighthRow:
-                                        print('black promotion attack')
+                                        legalMoves.append(destCoord)
                                     elif self.alliance == "White" and destCoord in Piece.firstRow:
-                                        print('white promotion attack')
+                                        legalMoves.append(destCoord)
                                     else:
-                                        print('pawn attack')
+                                        legalMoves.append(destCoord)
 
                             elif not board.enPassPawn == None:
 
                                 if board.enPassPawnBehind == destCoord:
                                     enPP = board.enPassPawn
                                     if not self.alliance == enPP.alliance:
-
-                                        print('enPassant Attack')
+                                        legalMoves.append(destCoord)
 
 
         return legalMoves
