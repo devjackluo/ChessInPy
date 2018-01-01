@@ -30,9 +30,6 @@ class Move:
         gameTiles = {}
 
 
-
-
-
         # TODO CHECK if enpassant attack
         enpassLocation = None
         if self.movedPiece.toString() == 'P':

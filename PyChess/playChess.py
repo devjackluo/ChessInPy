@@ -102,6 +102,8 @@ drawChessPieces()
 
 
 selectedImage = None
+selectedLegals = None
+resetColors = []
 quitGame = False
 mx, my = pygame.mouse.get_pos()
 prevx, prevy = [0,0]
@@ -126,15 +128,32 @@ while not quitGame:
                                 prevx = allPieces[piece][1][0]
                                 prevy = allPieces[piece][1][1]
 
+                                selectedLegals = allPieces[selectedImage][2].calculateLegalMoves(firstBoard)
+                                for legals in selectedLegals:
+                                    resetColors.append([legals, allTiles[legals][0]])
+                                    allTiles[legals][0] = (239, 131, 129)
+
+
         if event.type == pygame.MOUSEMOTION and not selectedImage == None:
 
             mx, my = pygame.mouse.get_pos()
             allPieces[selectedImage][1][0] = mx-50
             allPieces[selectedImage][1][1] = my-50
 
+            # #TODO highlight all legal moves
+            # selectedLegals = allPieces[selectedImage][2].calculateLegalMoves(firstBoard)
+            # for legals in selectedLegals:
+            #     resetColors.append([legals ,allTiles[legals][0]])
+            #
+
+
         if event.type == pygame.MOUSEBUTTONUP:
 
+            for resets in resetColors:
+                allTiles[resets[0]][0] = resets[1]
+
             try:
+
                 pieceMoves = allPieces[selectedImage][2].calculateLegalMoves(firstBoard)
                 legal = False
                 theMove = 0
@@ -193,5 +212,5 @@ while not quitGame:
 
 
     pygame.display.update()
-    clock.tick(10)
+    clock.tick(60)
 

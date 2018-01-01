@@ -30,6 +30,9 @@ class Pawn(Piece):
 
             destCoord = self.position + (vector*self.allianceMultiple)
 
+
+            # TODO FIX PAWNS
+
             if 0 <= destCoord < 64:
 
                 if vector == 8 and board.gameTiles[destCoord].pieceOnTile.toString() == "-":
