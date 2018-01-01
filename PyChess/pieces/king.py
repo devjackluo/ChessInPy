@@ -81,13 +81,13 @@ class King(Piece):
                 if board.gameTiles[1].pieceOnTile.toString() == "-":
                     if board.gameTiles[2].pieceOnTile.toString() == "-":
                         if board.gameTiles[3].pieceOnTile.toString() == "-":
-                            if not 3 in allEnemyAttacks and not 2 in allEnemyAttacks:
+                            if not 3 in allEnemyAttacks and not 2 in allEnemyAttacks and not 4 in allEnemyAttacks:
                                 legalMoves.append(2)
 
             if board.gameTiles[7].pieceOnTile.toString() == "R" and board.gameTiles[2].pieceOnTile.firstMove:
                 if board.gameTiles[6].pieceOnTile.toString() == "-":
                     if board.gameTiles[5].pieceOnTile.toString() == "-":
-                        if not 5 in allEnemyAttacks and not 6 in allEnemyAttacks:
+                        if not 5 in allEnemyAttacks and not 6 in allEnemyAttacks and not 4 in allEnemyAttacks:
                             legalMoves.append(6)
 
         elif self.firstMove and self.alliance == "White":
@@ -96,13 +96,13 @@ class King(Piece):
                 if board.gameTiles[57].pieceOnTile.toString() == "-":
                     if board.gameTiles[58].pieceOnTile.toString() == "-":
                         if board.gameTiles[59].pieceOnTile.toString() == "-":
-                            if not 58 in allEnemyAttacks and not 59 in allEnemyAttacks:
+                            if not 58 in allEnemyAttacks and not 59 in allEnemyAttacks and not 60 in allEnemyAttacks:
                                 legalMoves.append(58)
 
             if board.gameTiles[63].pieceOnTile.toString() == "r" and board.gameTiles[2].pieceOnTile.firstMove:
                 if board.gameTiles[62].pieceOnTile.toString() == "-":
                     if board.gameTiles[61].pieceOnTile.toString() == "-":
-                        if not 62 in allEnemyAttacks and not 61 in allEnemyAttacks:
+                        if not 62 in allEnemyAttacks and not 61 in allEnemyAttacks and not 60 in allEnemyAttacks:
                             legalMoves.append(62)
 
         #print(legalMoves)

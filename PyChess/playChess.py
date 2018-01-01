@@ -13,6 +13,7 @@ firstBoard.createBoard()
 
 allTiles = []
 allPieces = []
+currentPlayer = "White"
 
 def createSqParams():
     allSqRanges = []
@@ -118,11 +119,12 @@ while not quitGame:
             if selectedImage == None:
                 mx, my = pygame.mouse.get_pos()
                 for piece in range(len(allPieces)):
-                    if allPieces[piece][1][0] < mx < allPieces[piece][1][0]+100:
-                        if allPieces[piece][1][1] < my < allPieces[piece][1][1] + 100:
-                            selectedImage = piece
-                            prevx = allPieces[piece][1][0]
-                            prevy = allPieces[piece][1][1]
+                    if allPieces[piece][2].alliance == currentPlayer:
+                        if allPieces[piece][1][0] < mx < allPieces[piece][1][0]+100:
+                            if allPieces[piece][1][1] < my < allPieces[piece][1][1] + 100:
+                                selectedImage = piece
+                                prevx = allPieces[piece][1][0]
+                                prevy = allPieces[piece][1][1]
 
         if event.type == pygame.MOUSEMOTION and not selectedImage == None:
 
@@ -162,6 +164,11 @@ while not quitGame:
                     newP = updateChessPieces()
                     allPieces = newP
                     #print(len(newP))
+
+                    if currentPlayer == "White":
+                        currentPlayer = "Black"
+                    else:
+                        currentPlayer = "White"
 
                     #allPieces[selectedImage][2].position = theMove
                     # allPieces[selectedImage][2].position = theMove
