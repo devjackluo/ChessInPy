@@ -29,6 +29,12 @@ class Move:
         newBoard = Board()
         gameTiles = {}
 
+
+        # TODO Check if it is castle move
+
+
+
+
         # TODO CHECK if enpassant attack
         enpassLocation = None
         if self.movedPiece.toString() == 'P':
