@@ -1,5 +1,4 @@
 from tile import Tile
-from piece import Piece
 from pieces import rook
 from pieces import king
 from pieces import queen
@@ -13,9 +12,21 @@ class Board:
     gameTiles = {}
     enPassPawn = None
     enPassPawnBehind = None
+    currentPlayer = "White"
 
     def __init__(self):
         pass
+
+    def calculateActivePieces(self, alliance):
+
+        activeP = []
+        for tile in range(len(self.gameTiles)):
+            if not self.gameTiles[tile].pieceOnTile.toString() == "-":
+                if self.gameTiles[tile].pieceOnTile.alliance == alliance:
+                    activeP.append(self.gameTiles[tile].pieceOnTile)
+
+        return activeP
+
 
     def createBoard(self):
 

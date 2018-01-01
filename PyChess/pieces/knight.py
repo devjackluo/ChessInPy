@@ -1,4 +1,4 @@
-from piece import Piece
+from pieces.piece import Piece
 
 
 class Knight(Piece):
@@ -16,6 +16,7 @@ class Knight(Piece):
         return "N" if self.alliance == "Black" else "n"
 
     def calculateLegalMoves(self, board):
+
         legalMoves = []
         for vector in self.possibleMoveVectors:
             destCoord = self.position + vector
@@ -28,6 +29,9 @@ class Knight(Piece):
                     else:
                         if not destTile.pieceOnTile.alliance == self.alliance:
                             legalMoves.append(destCoord)
+
+
+
 
         return legalMoves
 
@@ -50,6 +54,16 @@ class Knight(Piece):
                 return True
 
         return False
+
+
+
+
+
+
+
+
+
+
 
     # def move(self, destination):
     #     return Knight(self.alliance, destination)

@@ -1,3 +1,7 @@
+
+# import move
+# from move import Move
+
 class Piece:
 
     firstMove = True
@@ -15,4 +19,20 @@ class Piece:
 
     firstRow = [0,1,2,3,4,5,6,7]
     eighthRow = [63,62,61,60,59,58,57,56]
+
+    def calculateIfLeavesCheck(self, board, legalMoves):
+
+        #nextBoard = chessBoard.Board()
+
+        # for lm in legalMoves:
+        #     newMove = move.Move(board, self, lm)
+        #     nextBoard = newMove.createNewBoard()
+        #     nextBoard.printBoard()
+
+
+        pass
+
+
+
+
 

@@ -13,7 +13,7 @@ firstBoard.createBoard()
 
 allTiles = []
 allPieces = []
-currentPlayer = "White"
+currentPlayer = firstBoard.currentPlayer
 
 def createSqParams():
     allSqRanges = []
@@ -121,7 +121,9 @@ while not quitGame:
             if selectedImage == None:
                 mx, my = pygame.mouse.get_pos()
                 for piece in range(len(allPieces)):
+
                     if allPieces[piece][2].alliance == currentPlayer:
+
                         if allPieces[piece][1][0] < mx < allPieces[piece][1][0]+100:
                             if allPieces[piece][1][1] < my < allPieces[piece][1][1] + 100:
                                 selectedImage = piece
@@ -154,6 +156,8 @@ while not quitGame:
 
             try:
 
+
+
                 pieceMoves = allPieces[selectedImage][2].calculateLegalMoves(firstBoard)
                 legal = False
                 theMove = 0
@@ -184,10 +188,8 @@ while not quitGame:
                     allPieces = newP
                     #print(len(newP))
 
-                    if currentPlayer == "White":
-                        currentPlayer = "Black"
-                    else:
-                        currentPlayer = "White"
+                    print(firstBoard.currentPlayer)
+                    currentPlayer = newBoard.currentPlayer
 
                     #allPieces[selectedImage][2].position = theMove
                     # allPieces[selectedImage][2].position = theMove

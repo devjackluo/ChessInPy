@@ -1,4 +1,4 @@
-from piece import Piece
+from pieces.piece import Piece
 
 
 class King(Piece):
@@ -15,6 +15,7 @@ class King(Piece):
         return "K" if self.alliance == "Black" else "k"
 
     def calculateLegalMoves(self, board):
+
         legalMoves = []
         for vector in self.possibleMoveVectors:
             destCoord = self.position + vector
@@ -131,10 +132,8 @@ class King(Piece):
         legalMoves = []
         for vector in self.possibleMoveVectors:
             destCoord = self.position + vector
-
             badMove = self.calculateEdgeCases(self.position, vector)
             if not badMove:
-
                 if 0 <= destCoord < 64:
                     destTile = board.gameTiles[destCoord]
                     if destTile.pieceOnTile.toString() == "-":

@@ -1,4 +1,4 @@
-from piece import Piece
+from pieces.piece import Piece
 
 
 class Pawn(Piece):
@@ -44,58 +44,80 @@ class Pawn(Piece):
                     else:
                         legalMoves.append(destCoord)
 
-                elif vector == 16 and self.firstMove:
+                elif vector == 16 and self.firstMove and board.gameTiles[destCoord].pieceOnTile.toString() == "-":
 
                     behindJump = self.position + (8 * self.allianceMultiple)
                     if board.gameTiles[behindJump].pieceOnTile.toString() == "-":
-                        if board.gameTiles[destCoord].pieceOnTile.toString() == "-":
-                            legalMoves.append(destCoord)
+                        legalMoves.append(destCoord)
 
                 elif vector == 7:
 
-                    if (not self.position in Piece.eighthCol and not self.alliance == "White") or (not self.position in Piece.firstCol and not self.alliance == "Black"):
 
-                            if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
-                                piece = board.gameTiles[destCoord].pieceOnTile
-                                if not self.alliance == piece.alliance:
 
-                                    if self.alliance == "Black" and destCoord in Piece.eighthRow:
-                                        legalMoves.append(destCoord)
-                                    elif self.alliance == "White" and destCoord in Piece.firstRow:
-                                        legalMoves.append(destCoord)
-                                    else:
-                                        legalMoves.append(destCoord)
+                    #TODO FIX logic error
+                    if self.position in Piece.firstCol and self.alliance == "Black":
 
-                            elif not board.enPassPawn == None:
+                        pass
 
-                                if board.enPassPawnBehind == destCoord:
-                                    enPP = board.enPassPawn
-                                    if not self.alliance == enPP.alliance:
+                    elif self.position in Piece.eighthCol and self.alliance == "White":
 
-                                        legalMoves.append(destCoord)
+                        pass
+
+                    else:
+
+                        if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
+
+                            piece = board.gameTiles[destCoord].pieceOnTile
+                            if not self.alliance == piece.alliance:
+
+                                if self.alliance == "Black" and destCoord in Piece.eighthRow:
+                                    legalMoves.append(destCoord)
+                                elif self.alliance == "White" and destCoord in Piece.firstRow:
+                                    legalMoves.append(destCoord)
+                                else:
+
+                                    legalMoves.append(destCoord)
+
+                        elif not board.enPassPawn == None:
+
+                            if board.enPassPawnBehind == destCoord:
+                                enPP = board.enPassPawn
+                                if not self.alliance == enPP.alliance:
+
+                                    legalMoves.append(destCoord)
 
 
                 elif vector == 9:
 
-                    if (not self.position in Piece.firstCol and not self.alliance == "White") or (not self.position in Piece.eighthCol and not self.alliance == "Black"):
 
-                            if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
-                                piece = board.gameTiles[destCoord].pieceOnTile
-                                if not self.alliance == piece.alliance:
+                    if self.position in Piece.eighthCol and self.alliance == "Black":
 
-                                    if self.alliance == "Black" and destCoord in Piece.eighthRow:
-                                        legalMoves.append(destCoord)
-                                    elif self.alliance == "White" and destCoord in Piece.firstRow:
-                                        legalMoves.append(destCoord)
-                                    else:
-                                        legalMoves.append(destCoord)
+                        pass
 
-                            elif not board.enPassPawn == None:
+                    elif self.position in Piece.firstCol and self.alliance == "White":
 
-                                if board.enPassPawnBehind == destCoord:
-                                    enPP = board.enPassPawn
-                                    if not self.alliance == enPP.alliance:
-                                        legalMoves.append(destCoord)
+                        pass
+
+                    else:
+
+                        if not board.gameTiles[destCoord].pieceOnTile.toString() == "-":
+                            piece = board.gameTiles[destCoord].pieceOnTile
+                            if not self.alliance == piece.alliance:
+
+                                if self.alliance == "Black" and destCoord in Piece.eighthRow:
+                                    legalMoves.append(destCoord)
+                                elif self.alliance == "White" and destCoord in Piece.firstRow:
+                                    legalMoves.append(destCoord)
+                                else:
+                                    legalMoves.append(destCoord)
+
+                        elif not board.enPassPawn == None:
+
+                            if board.enPassPawnBehind == destCoord:
+                                enPP = board.enPassPawn
+                                if not self.alliance == enPP.alliance:
+                                    legalMoves.append(destCoord)
+
 
 
         return legalMoves

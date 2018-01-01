@@ -1,11 +1,5 @@
 from tile import Tile
-from piece import Piece
 from pieces import rook
-from pieces import king
-from pieces import queen
-from pieces import knight
-from pieces import bishop
-from pieces import pawn
 from pieces import nullPiece
 from chessBoard import Board
 import copy
@@ -16,7 +10,6 @@ class Move:
     board = None
     movedPiece = None
     destination = None
-
 
 
     def __init__(self, board, movePiece, destination):
@@ -104,11 +97,74 @@ class Move:
 
 
 
+        #TODO add promotion
 
 
+
+        # Switch players
+        newBoard.currentPlayer = self.board.currentPlayer
+        if newBoard.currentPlayer == "White":
+            newBoard.currentPlayer = "Black"
+        elif newBoard.currentPlayer == "Black":
+            newBoard.currentPlayer = "White"
+
+
+
+
+        # TODO Check checks
+        good = self.checkChecks(newBoard)
+
+        if not good:
+            print("InvalidMove")
+            return self.board
 
 
         return newBoard
+
+
+    def checkChecks(self, newBoard):
+
+
+        # TODO CHECK IF leaves king in check
+        # return the old board.
+        if newBoard.currentPlayer == "White":
+
+            enemyKing = 0
+            for sq in range(len(newBoard.gameTiles)):
+                if newBoard.gameTiles[sq].pieceOnTile.toString() == "K":
+                    enemyKing = newBoard.gameTiles[sq].pieceOnTile.position
+            # print(enemyKing)
+
+            myPieces = newBoard.calculateActivePieces("White")
+
+            for piece in myPieces:
+                pieceLegals = piece.calculateLegalMoves(newBoard)
+                for legals in pieceLegals:
+                    if legals == enemyKing:
+                        return False
+
+
+        else:
+
+            enemyKing = 0
+            for sq in range(len(newBoard.gameTiles)):
+                if newBoard.gameTiles[sq].pieceOnTile.toString() == "k":
+                    enemyKing = newBoard.gameTiles[sq].pieceOnTile.position
+
+            myPieces = newBoard.calculateActivePieces("Black")
+
+            for piece in myPieces:
+                pieceLegals = piece.calculateLegalMoves(newBoard)
+                for legals in pieceLegals:
+                    if legals == enemyKing:
+                        return False
+
+        return True
+
+
+
+
+
 
 
 
