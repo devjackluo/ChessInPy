@@ -6,6 +6,7 @@ class Knight(Piece):
     alliance = None
     position = None
     possibleMoveVectors = [-17,-15,-10,-6,6,10,15,17]
+    value = 300
 
     def __init__(self, alliance, position):
         self.alliance = alliance

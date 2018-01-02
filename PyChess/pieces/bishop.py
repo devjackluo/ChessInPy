@@ -5,6 +5,7 @@ class Bishop(Piece):
     alliance = None
     position = None
     possibleMoveVectors = [-9, -7, 7, 9]
+    value = 300
 
     def __init__(self, alliance, position):
         self.alliance = alliance

@@ -5,6 +5,7 @@ class Rook(Piece):
     alliance = None
     position = None
     possibleMoveVectors = [-8,-1,1,8]
+    value = 500
 
     def __init__(self, alliance, position):
         self.alliance = alliance

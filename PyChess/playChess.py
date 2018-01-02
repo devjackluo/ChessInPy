@@ -1,6 +1,7 @@
 import pygame
 import chessBoard
 from move import Move
+from minimax import Minimax
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 800))
@@ -133,7 +134,12 @@ while not quitGame:
                                 selectedLegals = allPieces[selectedImage][2].calculateLegalMoves(firstBoard)
                                 for legals in selectedLegals:
                                     resetColors.append([legals, allTiles[legals][0]])
-                                    allTiles[legals][0] = (239, 131, 129)
+
+
+                                    if allTiles[legals][0] == (66,134,244):
+                                        allTiles[legals][0] = (135, 46, 40)
+                                    else:
+                                        allTiles[legals][0] = (183, 65, 56)
 
 
         if event.type == pygame.MOUSEMOTION and not selectedImage == None:
@@ -173,6 +179,7 @@ while not quitGame:
                     allPieces[selectedImage][1][0] = allSqParams[theMove][0]
                     allPieces[selectedImage][1][1] = allSqParams[theMove][2]
 
+
                     # TODO make it so it updates board
                     # TODO update moved piece's legal moves some how
                     # print(allPieces[selectedImage][2])
@@ -180,7 +187,10 @@ while not quitGame:
                     # print(firstBoard)
                     thisMove = Move(firstBoard, allPieces[selectedImage][2], theMove)
                     newBoard = thisMove.createNewBoard()
-                    firstBoard = newBoard
+                    if not newBoard == False:
+                        firstBoard = newBoard
+                    # else:
+                    #     print(newBoard)
                     #firstBoard.printBoard()
 
                     # TODO update game pieces
@@ -188,8 +198,27 @@ while not quitGame:
                     allPieces = newP
                     #print(len(newP))
 
-                    print(firstBoard.currentPlayer)
+                    #print(firstBoard.currentPlayer)
                     currentPlayer = newBoard.currentPlayer
+
+
+                    # TODO add logic that it is AI player
+                    if currentPlayer == "Black":
+                        aiBoard = True
+                        minimax = Minimax(firstBoard, 2)
+                        aiBoard = minimax.getMove()
+                        aiBoard.printBoard()
+                        # aiBoard.printBoard()
+                        firstBoard = aiBoard
+
+                        # TODO update game pieces
+                        newP = updateChessPieces()
+                        allPieces = newP
+                        currentPlayer = aiBoard.currentPlayer
+
+                        #pygame.time.delay(1000)
+
+                    #minimax.board.printBoard()
 
                     #allPieces[selectedImage][2].position = theMove
                     # allPieces[selectedImage][2].position = theMove
@@ -213,6 +242,9 @@ while not quitGame:
         gameDisplay.blit(img[0], img[1])
 
 
+
     pygame.display.update()
     clock.tick(60)
+
+
 

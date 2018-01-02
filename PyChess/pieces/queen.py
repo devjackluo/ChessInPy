@@ -6,6 +6,7 @@ class Queen(Piece):
     alliance = None
     position = None
     possibleMoveVectors = [-9, -7, 7, 9, -8, -1, 1, 8]
+    value = 900
 
     def __init__(self, alliance, position):
         self.alliance = alliance

@@ -28,12 +28,12 @@ class Move:
         if self.movedPiece.toString() == 'P':
             if not self.board.enPassPawn == None:
                 if self.destination == self.board.enPassPawnBehind:
-                    print("b enpassatk")
+                    #print("b enpassatk")
                     enpassLocation = self.board.enPassPawn.position
         elif self.movedPiece.toString() == 'p':
             if not self.board.enPassPawn == None:
                 if self.destination == self.board.enPassPawnBehind:
-                    print("w enpassatk")
+                    #print("w enpassatk")
                     enpassLocation = self.board.enPassPawn.position
 
 
@@ -51,12 +51,12 @@ class Move:
         if self.movedPiece.toString() == 'K' and self.movedPiece.firstMove:
             if self.destination == 2:
                 if self.board.gameTiles[0].pieceOnTile.toString() == "R" and self.board.gameTiles[0].pieceOnTile.firstMove:
-                    print('b qc')
+                    #print('b qc')
                     gameTiles[0] = Tile(0, nullPiece.NullPiece())
                     gameTiles[3] = Tile(3, rook.Rook("Black", 3))
             elif self.destination == 6:
                 if self.board.gameTiles[7].pieceOnTile.toString() == "R" and self.board.gameTiles[7].pieceOnTile.firstMove:
-                    print('b kc')
+                    #print('b kc')
                     gameTiles[7] = Tile(7, nullPiece.NullPiece())
                     gameTiles[5] = Tile(5, rook.Rook("Black", 5))
 
@@ -64,12 +64,12 @@ class Move:
         elif self.movedPiece.toString() == 'k':
             if self.destination == 58:
                 if self.board.gameTiles[56].pieceOnTile.toString() == "r" and self.board.gameTiles[56].pieceOnTile.firstMove:
-                    print('w qc')
+                    #print('w qc')
                     gameTiles[56] = Tile(56, nullPiece.NullPiece())
                     gameTiles[59] = Tile(59, rook.Rook("White", 59))
             elif self.destination == 62:
                 if self.board.gameTiles[63].pieceOnTile.toString() == "r" and self.board.gameTiles[56].pieceOnTile.firstMove:
-                    print('w kc')
+                    #print('w kc')
                     gameTiles[63] = Tile(63, nullPiece.NullPiece())
                     gameTiles[61] = Tile(61, rook.Rook("White", 61))
 
@@ -86,12 +86,12 @@ class Move:
         # TODO if pawn was jump, set it to enpassant pawn
         if self.movedPiece.toString() == 'P':
             if self.movedPiece.position+16 == self.destination:
-                print("Black j")
+                #print("Black j")
                 newBoard.enPassPawn = updatePiece
                 newBoard.enPassPawnBehind = self.movedPiece.position+8
         elif self.movedPiece.toString() == 'p':
             if self.movedPiece.position-16 == self.destination:
-                print("White j")
+                #print("White j")
                 newBoard.enPassPawn = updatePiece
                 newBoard.enPassPawnBehind = self.movedPiece.position-8
 
@@ -115,8 +115,9 @@ class Move:
         good = self.checkChecks(newBoard)
 
         if not good:
-            print("InvalidMove")
-            return self.board
+            # print("InvalidMove")
+            # return self.board
+            return False
 
 
         return newBoard

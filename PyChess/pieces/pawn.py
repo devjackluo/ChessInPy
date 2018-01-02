@@ -8,6 +8,7 @@ class Pawn(Piece):
     possibleMoveVectors = [7,9,8,16]
     allianceMultiple = None
     firstMove = True
+    value = 100
 
     def __init__(self, alliance, position):
         self.alliance = alliance

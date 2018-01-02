@@ -27,6 +27,14 @@ class Board:
 
         return activeP
 
+    def calculateLegalMoves(self, pieces, board):
+        allLegals = []
+        for piece in pieces:
+            pieceMoves = piece.calculateLegalMoves(board)
+            for move in pieceMoves:
+                allLegals.append([move, piece])
+        return allLegals
+
 
     def createBoard(self):
 
