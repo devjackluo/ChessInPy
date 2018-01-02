@@ -205,7 +205,7 @@ while not quitGame:
                     # TODO add logic that it is AI player
                     if currentPlayer == "Black":
                         aiBoard = True
-                        minimax = Minimax(firstBoard, 2)
+                        minimax = Minimax(firstBoard, 1)
                         aiBoard = minimax.getMove()
                         aiBoard.printBoard()
                         # aiBoard.printBoard()

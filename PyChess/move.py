@@ -1,6 +1,7 @@
 from tile import Tile
 from pieces import rook
 from pieces import nullPiece
+from pieces import queen
 from chessBoard import Board
 import copy
 
@@ -98,6 +99,14 @@ class Move:
 
 
         #TODO add promotion
+        if self.movedPiece.toString() == 'P':
+            if self.destination in self.movedPiece.eighthRow:
+                print("Promote")
+                newBoard.gameTiles[self.destination] = Tile(self.destination, queen.Queen("Black", self.destination))
+        elif self.movedPiece.toString() == 'p':
+            if self.destination in self.movedPiece.firstRow:
+                print("Promote")
+                newBoard.gameTiles[self.destination] = Tile(self.destination, queen.Queen("White", self.destination))
 
 
 
