@@ -1,6 +1,5 @@
-from chessBoard import Board
-from move import Move
-from boardEvaluator import BoardEvaluator
+from board.move import Move
+from player.boardEvaluator import BoardEvaluator
 
 class Minimax:
 

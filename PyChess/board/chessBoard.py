@@ -1,11 +1,12 @@
-from tile import Tile
-from pieces import rook
-from pieces import king
-from pieces import queen
-from pieces import knight
+from board.tile import Tile
 from pieces import bishop
-from pieces import pawn
+from pieces import king
+from pieces import knight
 from pieces import nullPiece
+from pieces import pawn
+from pieces import queen
+from pieces import rook
+
 
 class Board:
 

@@ -1,9 +1,10 @@
-from tile import Tile
-from pieces import rook
+import copy
+
+from board.chessBoard import Board
+from board.tile import Tile
 from pieces import nullPiece
 from pieces import queen
-from chessBoard import Board
-import copy
+from pieces import rook
 
 
 class Move:

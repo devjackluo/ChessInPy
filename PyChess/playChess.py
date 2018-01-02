@@ -1,7 +1,8 @@
 import pygame
-import chessBoard
-from move import Move
-from minimax import Minimax
+
+from board import chessBoard
+from board.move import Move
+from player.minimax import Minimax
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 800))
@@ -207,7 +208,7 @@ while not quitGame:
                         aiBoard = True
                         minimax = Minimax(firstBoard, 1)
                         aiBoard = minimax.getMove()
-                        aiBoard.printBoard()
+                        # aiBoard.printBoard()
                         # aiBoard.printBoard()
                         firstBoard = aiBoard
 
