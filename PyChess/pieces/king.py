@@ -6,7 +6,7 @@ class King(Piece):
     alliance = None
     position = None
     possibleMoveVectors = [-9, -7, 7, 9, -8, -1, 1, 8]
-    value = 10000
+    value = 1100
 
     def __init__(self, alliance, position):
         self.alliance = alliance

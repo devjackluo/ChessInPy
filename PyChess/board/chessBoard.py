@@ -89,20 +89,18 @@ class Board:
                 print('|', end='\n')
                 count = 0
 
+    def getBoardArr(self):
 
+        boardArr = []
 
+        for tiles in range(len(self.gameTiles)):
+            if(self.gameTiles[tiles].pieceOnTile.toString() == "-"):
+                boardArr.append(0)
+            else:
+                if(self.currentPlayer == "White"):
+                    boardArr.append(self.gameTiles[tiles].pieceOnTile.value)
+                else:
+                    boardArr.append(-self.gameTiles[tiles].pieceOnTile.value)
 
-# firstBoard = Board()
-# firstBoard.createBoard()
-# print(firstBoard.gameTiles)
-# firstBoard.printBoard()
-#firstBoard.gameTiles[1].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[0].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[2].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[3].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[4].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[9].pieceOnTile.calculateLegalMoves(firstBoard)
-#firstBoard.gameTiles[55].pieceOnTile.calculateLegalMoves(firstBoard)
-# firstBoard.enPassPawn = firstBoard.gameTiles[24].pieceOnTile
-# firstBoard.enPassPawnBehind = 16
-# firstBoard.gameTiles[25].pieceOnTile.calculateLegalMoves(firstBoard)
+        return boardArr
+

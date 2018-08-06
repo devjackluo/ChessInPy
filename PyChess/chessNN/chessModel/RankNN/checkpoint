@@ -1,0 +1,2 @@
+model_checkpoint_path: "chessRankModel.ckpt"
+all_model_checkpoint_paths: "chessRankModel.ckpt"
