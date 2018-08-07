@@ -53,6 +53,9 @@ class playChessNN():
         self.nnThinking = False
         self.nnSquareColors = []
 
+        thread = threading.Thread(target=self.backgroundNN, args=[self.firstBoard])
+        thread.start()
+
         while not self.quitGame:
 
             for event in pygame.event.get():
@@ -97,6 +100,8 @@ class playChessNN():
 
                         for resets in self.resetColors:
                             self.allTiles[resets[0]][0] = resets[1]
+                            #self.resetColors.remove(resets)
+                        self.resetColors = []
 
                         try:
 
@@ -130,6 +135,7 @@ class playChessNN():
                                 # HANDLE GETTING NN RESPONSE
                                 for resets in self.nnSquareColors:
                                     self.allTiles[resets[0]][0] = resets[1]
+                                self.nnSquareColors = []
 
                                 thread = threading.Thread(target=self.backgroundNN, args=[newBoard])
                                 thread.start()

@@ -8,6 +8,7 @@ from pieces import queen
 from pieces import rook
 
 
+
 class Board:
 
     gameTiles = {}
@@ -58,11 +59,6 @@ class Board:
         self.gameTiles[14] = Tile(14, pawn.Pawn("Black", 14))
         self.gameTiles[15] = Tile(15, pawn.Pawn("Black", 15))
 
-        # self.gameTiles[25] = Tile(25, pawn.Pawn("White", 25))
-        # #self.gameTiles[18] = Tile(18, pawn.Pawn("Black", 18))
-        # self.gameTiles[26] = Tile(26, pawn.Pawn("Black", 26))
-        # self.gameTiles[24] = Tile(24, pawn.Pawn("Black", 24))
-
         self.gameTiles[48] = Tile(48, pawn.Pawn("White", 48))
         self.gameTiles[49] = Tile(49, pawn.Pawn("White", 49))
         self.gameTiles[50] = Tile(50, pawn.Pawn("White", 50))
@@ -90,17 +86,13 @@ class Board:
                 count = 0
 
     def getBoardArr(self):
-
         boardArr = []
-
         for tiles in range(len(self.gameTiles)):
-            if(self.gameTiles[tiles].pieceOnTile.toString() == "-"):
+            if (self.gameTiles[tiles].pieceOnTile.toString() == "-"):
                 boardArr.append(0)
             else:
-                if(self.currentPlayer == "White"):
+                if (self.currentPlayer == "White"):
                     boardArr.append(self.gameTiles[tiles].pieceOnTile.value)
                 else:
                     boardArr.append(-self.gameTiles[tiles].pieceOnTile.value)
-
         return boardArr
-

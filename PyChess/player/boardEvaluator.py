@@ -4,7 +4,6 @@ class BoardEvaluator:
         pass
 
     def evaluate(self, board, depth):
-        #print(self.scorePlayer("White", board) - self.scorePlayer("Black", board))
         return self.scorePlayer("White", board) - self.scorePlayer("Black", board)
 
     def scorePlayer(self, player, board):

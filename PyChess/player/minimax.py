@@ -1,11 +1,16 @@
 from board.move import Move
 from player.boardEvaluator import BoardEvaluator
+import sys
 
 class Minimax:
 
     board = None
     depth = None
     boardEvaluator = None
+    currentValue = None
+    highestSeenValue = None
+    lowestSeenValue = None
+    bestMove = None
 
     def __init__(self, board, depth):
         self.board = board
@@ -14,60 +19,39 @@ class Minimax:
 
     def getMove(self):
 
-        #nBoard = Board()
-        #nBoard.printBoard()
-
         currentPlayer = self.board.currentPlayer
-        #print(currentPlayer)
-
         myPieces = self.board.calculateActivePieces(currentPlayer)
         allLegals = self.board.calculateLegalMoves(myPieces, self.board)
 
-        #print(allLegals)
-
-        bestMove = None
-        highestSeenValue = -1000000
-        lowestSeenValue = 1000000
-        currentValue = None
-
-        #print(self.depth)
+        self.highestSeenValue = -sys.maxsize
+        self.lowestSeenValue = sys.maxsize
 
         for myMoves in allLegals:
             makeMove = Move(self.board, myMoves[1], myMoves[0])
             newboard = makeMove.createNewBoard()
-            if not newboard == False:
+            if newboard is not False:
+
                 if currentPlayer == "White":
-                    #print("Work w")
-                    currentValue = self.min(newboard, self.depth)
-                    #print(currentValue)
+                    self.currentValue = self.min(newboard, self.depth)
                 else:
-                    #print("Work b")
-                    currentValue = self.max(newboard, self.depth)
-                    #print(currentValue)
+                    self.currentValue = self.max(newboard, self.depth)
 
-                if currentPlayer == "White" and currentValue > highestSeenValue:
-                    highestSeenValue = currentValue
-                    bestMove = newboard
+                if currentPlayer == "White" and self.currentValue > self.highestSeenValue:
+                    self.highestSeenValue = self.currentValue
+                    self.bestMove = newboard
+                if currentPlayer == "Black" and self.currentValue < self.lowestSeenValue:
+                    self.lowestSeenValue = self.currentValue
+                    self.bestMove = newboard
 
-                if currentPlayer == "Black" and currentValue < lowestSeenValue:
-                    lowestSeenValue = currentValue
-                    bestMove = newboard
-
-        return bestMove
-
-
+        return self.bestMove
 
     def max(self, board, depth):
 
-        #TODO checkmate/stalemate
-        if depth == 0:
-            #print("Hello")
-            #return 99
+        # TODO checkmate/stalemate
+        if depth == 0 and not Move.checkCheckmateOrStalemate(board, board.currentPlayer):
             return self.boardEvaluator.evaluate(board, depth)
 
-        #self.min(board, depth-1)
-
-        highestSeenValue = -1000000
+        highestSeenValue = -sys.maxsize
         myPieces = board.calculateActivePieces(board.currentPlayer)
         allLegals = board.calculateLegalMoves(myPieces, board)
 
@@ -75,22 +59,19 @@ class Minimax:
             makeMove = Move(self.board, myMoves[1], myMoves[0])
             newboard = makeMove.createNewBoard()
             if not newboard == False:
-                value = self.min(newboard, depth-1)
+                value = self.min(newboard, depth - 1)
                 if value >= highestSeenValue:
                     highestSeenValue = value
 
         return highestSeenValue
 
-
     def min(self, board, depth):
 
         # TODO checkmate/stalemate
-        if depth == 0:
+        if depth == 0 and not Move.checkCheckmateOrStalemate(board, board.currentPlayer):
             return self.boardEvaluator.evaluate(board, depth)
 
-        #self.max(board, depth-1)
-
-        lowestSeenValue = 1000000
+        lowestSeenValue = sys.maxsize
         myPieces = board.calculateActivePieces(board.currentPlayer)
         allLegals = board.calculateLegalMoves(myPieces, board)
 
@@ -103,9 +84,3 @@ class Minimax:
                     lowestSeenValue = value
 
         return lowestSeenValue
-
-
-
-
-
-

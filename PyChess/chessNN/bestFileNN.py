@@ -88,9 +88,9 @@ def train_neural_network(x):
 
             epoch_loss = 0
 
-            for _ in range(2):
+            epoch_x, epoch_y = getDataArrays()
 
-                epoch_x, epoch_y = getDataArrays()
+            for _ in range(60):
 
                 _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
 

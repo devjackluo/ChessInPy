@@ -34,18 +34,16 @@ class King(Piece):
 
 
         allEnemyAttacks = []
-        # TODO Check all opponent moves
-        enemyPieces = []
+        enemyPieces = None
 
-        # TODO black calling white, white calling black
 
         if self.alliance == "Black":
 
-            for tile in range(64):
-                if not board.gameTiles[tile].pieceOnTile.toString() == "-":
-                    if not board.gameTiles[tile].pieceOnTile.alliance == self.alliance:
-                        enemyPieces.append(board.gameTiles[tile].pieceOnTile)
-
+            # for tile in range(64):
+            #     if not board.gameTiles[tile].pieceOnTile.toString() == "-":
+            #         if not board.gameTiles[tile].pieceOnTile.alliance == self.alliance:
+            #             enemyPieces.append(board.gameTiles[tile].pieceOnTile)
+            enemyPieces = board.calculateActivePieces("White")
 
             for enemy in range(len(enemyPieces)):
                 if not enemyPieces[enemy].toString() == "k":
@@ -55,14 +53,13 @@ class King(Piece):
                 for move in range(len(moves)):
                     allEnemyAttacks.append(moves[move])
 
-            #print(allEnemyAttacks)
-
         elif self.alliance == "White":
 
-            for tile in range(64):
-                if not board.gameTiles[tile].pieceOnTile.toString() == "-":
-                    if not board.gameTiles[tile].pieceOnTile.alliance == self.alliance:
-                        enemyPieces.append(board.gameTiles[tile].pieceOnTile)
+            # for tile in range(64):
+            #     if not board.gameTiles[tile].pieceOnTile.toString() == "-":
+            #         if not board.gameTiles[tile].pieceOnTile.alliance == self.alliance:
+            #             enemyPieces.append(board.gameTiles[tile].pieceOnTile)
+            enemyPieces = board.calculateActivePieces("Black")
 
             for enemy in range(len(enemyPieces)):
                 if not enemyPieces[enemy].toString() == "K":
@@ -72,11 +69,7 @@ class King(Piece):
                 for move in range(len(moves)):
                     allEnemyAttacks.append(moves[move])
 
-            #print(allEnemyAttacks)
 
-
-        # TODO ADD CASTLE MOVES
-        # TODO make sure king can't move to illegal
         if self.firstMove and self.alliance == "Black":
 
             if board.gameTiles[0].pieceOnTile.toString() == "R" and board.gameTiles[2].pieceOnTile.firstMove:
@@ -107,7 +100,6 @@ class King(Piece):
                         if not 62 in allEnemyAttacks and not 61 in allEnemyAttacks and not 60 in allEnemyAttacks:
                             legalMoves.append(62)
 
-        #print(legalMoves)
         finalLegal = []
         for move in legalMoves:
             if not move in allEnemyAttacks:
@@ -120,11 +112,9 @@ class King(Piece):
         if position in Piece.firstCol:
             if vector == -9 or vector == 7 or vector == -1:
                 return True
-
         if position in Piece.eighthCol:
             if vector == -7 or vector == 9 or vector == 1:
                 return True
-
         return False
 
 
