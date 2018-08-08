@@ -26,6 +26,7 @@ class playChessNN():
 
     nnThinking = None
     nnSquareColors = None
+    movesSquareColors = None
 
     def __init__(self):
         pygame.init()
@@ -52,6 +53,7 @@ class playChessNN():
 
         self.nnThinking = False
         self.nnSquareColors = []
+        self.movesSquareColors = []
 
         thread = threading.Thread(target=self.backgroundNN, args=[self.firstBoard])
         thread.start()
@@ -82,7 +84,10 @@ class playChessNN():
                                         self.selectedLegals = self.allPieces[self.selectedImage][2].calculateLegalMoves(self.firstBoard)
                                         for legals in self.selectedLegals:
                                             self.resetColors.append([legals, self.allTiles[legals][0]])
-                                            if self.allTiles[legals][0] == (66, 134, 244) or self.allTiles[legals][0] == (29, 81, 39):
+                                            if self.allTiles[legals][0] == (66, 134, 244) \
+                                                    or self.allTiles[legals][0] == (29, 81, 39) \
+                                                    or self.allTiles[legals][0] == (86, 32, 130)\
+                                                    or self.allTiles[legals][0] == (226, 0, 0):
                                                 self.allTiles[legals][0] = (135, 46, 40)
                                             else:
                                                 self.allTiles[legals][0] = (183, 65, 56)
@@ -132,6 +137,10 @@ class playChessNN():
 
                                 self.currentPlayer = newBoard.currentPlayer
 
+                                for resets in self.movesSquareColors:
+                                    self.allTiles[resets[0]][0] = resets[1]
+                                self.movesSquareColors = []
+
                                 # HANDLE GETTING NN RESPONSE
                                 for resets in self.nnSquareColors:
                                     self.allTiles[resets[0]][0] = resets[1]
@@ -140,6 +149,8 @@ class playChessNN():
                                 thread = threading.Thread(target=self.backgroundNN, args=[newBoard])
                                 thread.start()
                                 # thread.join()
+
+
 
 
 
@@ -313,8 +324,8 @@ class playChessNN():
         files = list(file)
         ranks = list(rank)
 
-        print(files)
-        print(ranks)
+        # print(files)
+        # print(ranks)
 
         #print((int(file[0])-1)+((8-int(rank[0]))*8))
         #print(((8-int(rank[0]))*8))
@@ -338,9 +349,6 @@ class playChessNN():
         #     # else:
         #     #     self.allTiles[legals][0] = (183, 65, 56)
         #     self.allTiles[tile][0] = (100, 65, 56)
-
-
-
 
     def backgroundNN(self, board):
 
@@ -370,9 +378,79 @@ class playChessNN():
 
         self.nnThinking = False
 
+        #self.predictOkMove()
 
+    def predictOkMove(self):
 
+        self.nnThinking = True
 
+        myPieces = self.firstBoard.calculateActivePieces(self.firstBoard.currentPlayer)
+        allLegals = self.firstBoard.calculateLegalMoves(myPieces, self.firstBoard)
+
+        #boardString = ' '.join(str(x) for x in self.firstBoard.getBoardArrSide())
+
+        allBoardStrings = ""
+
+        validMoves = []
+
+        for myMoves in allLegals:
+            makeMove = Move(self.firstBoard, myMoves[1], myMoves[0])
+            newboard = makeMove.createNewBoard()
+            if newboard is not False:
+                validMoves.append(makeMove)
+                boardString = ' '.join(str(x) for x in newboard.getBoardArrSide())
+                allBoardStrings += boardString + "\n"
+                # sideResult = subprocess.check_output(
+                #     ["python", "C:\\Users\\Jack\\Documents\\GitHub\\ChessInPy\\PyChess\\chessNN\\predictOkMoveScript.py",
+                #      boardString])
+                # sideToString = sideResult.decode("utf-8").replace("\r", "").replace("\n", "")
+                # print(sideToString)
+
+        #print(allBoardStrings)
+
+        sideResult = subprocess.check_output(
+            ["python", "C:\\Users\\Jack\\Documents\\GitHub\\ChessInPy\\PyChess\\chessNN\\predictOkMoveScript.py",
+             allBoardStrings])
+        sideToString = sideResult.decode("utf-8").replace("\r", "").replace("\n", "")
+
+        print(sideToString)
+
+        arr = list(sideToString)
+        currentP = self.firstBoard.currentPlayer
+        square = []
+        for i in range(len(arr)):
+            if currentP == "White":
+                if arr[i] == "0":
+                    print(validMoves[i].movedPiece.toString(), validMoves[i].destination)
+                    if validMoves[i].destination not in square:
+                        square.append(validMoves[i].destination)
+            elif currentP == "Black":
+                if arr[i] == "1":
+                    print(validMoves[i].movedPiece.toString(), validMoves[i].destination)
+                    if validMoves[i].destination not in square:
+                        square.append(validMoves[i].destination)
+
+        # inputs = allBoardStrings.split('\n')
+        # for i in range(len(inputs)-1):
+        #     print(inputs[i])
+        #print(allBoardStrings)
+
+        self.colorGoodMoves(square)
+
+        self.nnThinking = False
+
+    def colorGoodMoves(self, squares):
+
+        for s in squares:
+            self.movesSquareColors.append([s, self.allTiles[s][0]])
+            if self.allTiles[s][0] == (66, 134, 244):
+                self.allTiles[s][0] = (86, 32, 130)
+            elif self.allTiles[s][0] == (143, 155, 175):
+                self.allTiles[s][0] = (124, 50, 186)
+            elif self.allTiles[s][0] == (29, 81, 39):
+                self.allTiles[s][0] = (226, 0, 0)
+            elif self.allTiles[s][0] == (48, 135, 65):
+                self.allTiles[s][0] = (226, 72, 72)
 
 playChessNN()
 

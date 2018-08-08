@@ -96,3 +96,15 @@ class Board:
                 else:
                     boardArr.append(-self.gameTiles[tiles].pieceOnTile.value)
         return boardArr
+
+    def getBoardArrSide(self):
+        boardArr = []
+        for tiles in range(len(self.gameTiles)):
+            if (self.gameTiles[tiles].pieceOnTile.toString() == "-"):
+                boardArr.append(0)
+            else:
+                if (self.gameTiles[tiles].pieceOnTile.alliance == "White"):
+                    boardArr.append(self.gameTiles[tiles].pieceOnTile.value)
+                else:
+                    boardArr.append(-self.gameTiles[tiles].pieceOnTile.value)
+        return boardArr

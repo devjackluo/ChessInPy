@@ -1,0 +1,2 @@
+model_checkpoint_path: "chessSideModel.ckpt"
+all_model_checkpoint_paths: "chessSideModel.ckpt"
