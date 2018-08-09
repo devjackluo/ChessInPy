@@ -90,7 +90,7 @@ def train_neural_network(x):
 
             epoch_x, epoch_y = getDataArrays()
 
-            for _ in range(60):
+            for _ in range(100):
 
                 _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
 

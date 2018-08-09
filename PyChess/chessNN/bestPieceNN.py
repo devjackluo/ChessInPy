@@ -71,7 +71,7 @@ def train_neural_network(x):
 
     saver = tf.train.Saver()
 
-    hm_epochs = 10
+    hm_epochs = 200
     with tf.Session() as sess:
 
         sess.run(tf.global_variables_initializer())
@@ -85,20 +85,20 @@ def train_neural_network(x):
             pass
 
 
-        for epoch in range(hm_epochs):
-
-            epoch_loss = 0
-
-            epoch_x, epoch_y = getDataArrays()
-
-            for _ in range(60):
-
-                _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
-
-                epoch_loss += c
-
-            print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
-            saver.save(sess, "./chessModel/PieceNN/chessPieceModel.ckpt")
+        # for epoch in range(hm_epochs):
+        #
+        #     epoch_loss = 0
+        #
+        #     epoch_x, epoch_y = getDataArrays()
+        #
+        #     for _ in range(100):
+        #
+        #         _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
+        #
+        #         epoch_loss += c
+        #
+        #     print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
+        #     saver.save(sess, "./chessModel/PieceNN/chessPieceModel.ckpt")
 
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
 
